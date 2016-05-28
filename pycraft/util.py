@@ -74,11 +74,7 @@ def reverse_sectorize(sector):
     -------
     columns: tuple of len SECTOR_SIZE**2; containing tuples of len 2
     """
-    columns = []
-    sector_x, sector_z, sector_z = sector
-    x_start, z_start = sector_x * SECTOR_SIZE, sector_z * SECTOR_SIZE
-    x_end, z_end = x_start + SECTOR_SIZE, z_start + SECTOR_SIZE
-    for x in range(x_start, x_end):
-        for z in range(z_start, z_end):
-            columns += [(x, z)]
-    return tuple(columns)
+    return tuple([(x, z) for x in range(sector[0]*SECTOR_SIZE, \
+                                        (sector[0]+1)*SECTOR_SIZE) \
+                         for z in range(sector[2]*SECTOR_SIZE, \
+                                        (sector[2]+1)*SECTOR_SIZE)])
